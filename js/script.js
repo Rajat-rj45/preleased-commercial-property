@@ -8,39 +8,377 @@
   const logoToggle = document.querySelector("[data-logo-toggle]");
 
   const brands = [
-    { name: "HDFC Bank", category: "banks", type: "Banking", logo: "assets/images/logo/hdfc-bank-logo.png", status: "Pre-Leased", roi: "6%*", lease: "9 Yr (3+3+3)", monthly: "₹2,50,000", description: "India's leading private bank with strong lease security and long-term rental stability.", start: "₹5 Cr", border: "" },
-    { name: "ICICI Bank", category: "banks", type: "Banking", logo: "assets/images/logo/icici-bank-logo.png", status: "Pre-Leased", roi: "6%*", lease: "9 Yr (3+3+3)", monthly: "₹2,75,000", description: "Premium banking tenant with high brand value and reliable lease commitments.", start: "₹5.5 Cr", border: "" },
-    { name: "Axis Bank", category: "banks", type: "Banking", logo: "assets/images/logo/axis-bank-logo.png", status: "Available", roi: "6.5%*", lease: "9 Yr (3+3+3)", monthly: "₹2,70,833", description: "Well-established private bank with strong demand in high-street commercial locations.", start: "₹5 Cr", border: "" },
-    { name: "Kotak Mahindra Bank", category: "banks", type: "Banking", logo: "assets/images/logo/kotak-mahindra-logo.png", status: "Pre-Leased", roi: "6%*", lease: "9 Yr (3+3+3)", monthly: "₹3,00,000", description: "Luxury banking brand preferred in premium commercial and SCO developments.", start: "₹6 Cr", border: "" },
-    { name: "IDFC First Bank", category: "banks", type: "Banking", logo: "assets/images/logo/idfc-first-bank-logo.png", status: "Available", roi: "6.5%*", lease: "9 Yr (3+3+3)", monthly: "₹2,43,750", description: "Fast-growing banking tenant expanding across urban retail destinations.", start: "₹4.5 Cr", border: "" },
-    { name: "PVR INOX", category: "entertainment", type: "Entertainment", logo: "assets/images/logo/pvr-logo.png", status: "Anchor", roi: "5.5%*", lease: "15 Yr", monthly: "₹1,37,500", description: "Multiplex anchor driving repeat mall footfall.", start: "₹3 Cr", border: "" },
-    { name: "Cinepolis", category: "entertainment", type: "Entertainment", logo: "assets/images/logo/cinepolis-logo.svg", status: "Anchor", roi: "5.5%*", lease: "15 Yr", monthly: "₹1,28,333", description: "Premium multiplex brand with long-term anchor value.", start: "₹2.8 Cr", border: "" },
-    { name: "SkyJumper", category: "gaming", type: "Gaming & Entertainment", logo: "assets/images/logo/skyjumper-logo.png", status: "High Demand", roi: "7%*", lease: "10 Yr", monthly: "₹1,16,667", description: "Trampoline park attracting family crowd.", start: "₹2 Cr", border: "hot" },
-    { name: "Timezone", category: "gaming", type: "Gaming & Entertainment", logo: "assets/images/logo/timezone-logo.svg", status: "Popular", roi: "7%*", lease: "7 Yr", monthly: "₹93,333", description: "Gaming arcade with consistent weekend footfall.", start: "₹1.6 Cr", border: "hot" },
-    { name: "Smaaash", category: "gaming", type: "Gaming & Entertainment", logo: "assets/images/logo/smaaash-logo.png", status: "Entertainment", roi: "7%*", lease: "5 Yr", monthly: "₹1,05,000", description: "Indoor gaming and sports experience brand.", start: "₹1.8 Cr", border: "hot" },
-    { name: "Haldiram", category: "food", type: "Food & Beverage", logo: "assets/images/logo/haldirams-logo.svg", status: "Pre-Leased", roi: "6.5%*", lease: "10 Yr", monthly: "₹40,625", description: "Popular Indian snack and food-service brand.", start: "₹75L", border: "" },
-    { name: "Starbucks", category: "food", type: "Food & Beverage", logo: "assets/images/logo/starbucks-logo.png", status: "Pre-Leased", roi: "6%*", lease: "10 Yr", monthly: "₹60,000", description: "Global coffee brand supporting premium footfall.", start: "₹1.2 Cr", border: "" },
-    { name: "Domino Pizza", category: "food", type: "Food & Beverage", logo: "assets/images/logo/dominos-pizza-logo.png", status: "Available", roi: "7%*", lease: "5 Yr", monthly: "₹32,083", description: "Quick-service restaurant unit with high-frequency demand.", start: "₹55L", border: "hot" },
-    { name: "McDonald", category: "food", type: "Food & Beverage", logo: "assets/images/logo/mcdonalds-logo.png", status: "Pre-Leased", roi: "6%*", lease: "10 Yr", monthly: "₹45,000", description: "Global QSR format with established consumer pull.", start: "₹90L", border: "" },
-    { name: "Reliance Retail", category: "retail", type: "Retail", logo: "assets/images/logo/reliance-retail-logo.png", status: "Pre-Leased", roi: "6%*", lease: "15 Yr", monthly: "₹75,000", description: "Large-format retail tenant with strong anchor value.", start: "₹1.5 Cr", border: "" },
-    { name: "DMart", category: "retail", type: "Retail", logo: "assets/images/logo/dmart-logo.png", status: "Available", roi: "6%*", lease: "10 Yr", monthly: "₹75,000", description: "Mass-market anchor for daily-consumption footfall.", start: "₹1.5 Cr", border: "blue-border" },
-    { name: "Subway", category: "food", type: "Food & Beverage", logo: "assets/images/logo/subway-logo.png", status: "Available", roi: "7%*", lease: "5 Yr", monthly: "₹26,250", description: "Global sandwich chain suited for compact food-court units.", start: "₹45L", border: "hot" },
-    { name: "Zara / H&M", category: "lifestyle", type: "Lifestyle", logo: "assets/images/logo/zara-logo.png", status: "Select Units", roi: "7%*", lease: "10 Yr", monthly: "₹1,16,667", description: "Fashion anchor concept for premium retail destinations.", start: "₹2 Cr", border: "hot" },
-    { name: "Decathlon", category: "lifestyle", type: "Lifestyle", logo: "assets/images/logo/decathlon-logo.svg", status: "Available", roi: "6%*", lease: "10 Yr", monthly: "₹90,000", description: "Sports retail anchor with strong destination value.", start: "₹1.8 Cr", border: "" },
-    { name: "Big Bazaar", category: "retail", type: "Retail", logo: "assets/images/logo/big-bazaar-logo.webp", status: "Anchor Tenant", roi: "5.5%", lease: "15 Yr", monthly: "₹68,750", description: "High-footfall grocery anchor supporting stable long-term rental income.", start: "₹1.5 Cr", border: "" }
-  ];
+  {
+    name: "21 fitness",
+    category: "retail",
+    type: "Retail",
+    logo: "image/21-fitness-logo.png",
+    status: "Available",
+    roi: "6.12%*",
+    lease: "10 Yr",
+    monthly: "₹25,000",
+    description: "Fitness retail tenant suited for high-street commercial and lifestyle-focused retail destinations.",
+    start: "₹49 Lakhs",
+    border: ""
+  },
+  {
+    name: "Blaast",
+    category: "retail",
+    type: "Retail",
+    logo: "image/blaast-logo.png",
+    status: "Available",
+    roi: "6.21%*",
+    lease: "12 Yr",
+    monthly: "₹30,000",
+    description: "Retail brand opportunity positioned for compact commercial spaces with steady rental income potential.",
+    start: "₹58 Lakhs",
+    border: ""
+  },
+  {
+    name: "Lulu",
+    category: "retail",
+    type: "Retail",
+    logo: "image/lulu-logo.png",
+    status: "Available",
+    roi: "6.32%*",
+    lease: "10 Yr",
+    monthly: "₹50,000",
+    description: "Recognized retail tenant supporting strong consumer footfall and long-term commercial visibility.",
+    start: "₹95 Lakhs",
+    border: ""
+  },
+  {
+    name: "Jus jumpin",
+    category: "gaming",
+    type: "Gaming & Entertainment",
+    logo: "image/jus-jumpin-logo.png",
+    status: "High Demand",
+    roi: "6.70%*",
+    lease: "10 Yr",
+    monthly: "₹90,000",
+    description: "Family entertainment and activity-based tenant suited for destination retail and weekend footfall.",
+    start: "₹1.95 Cr",
+    border: "hot"
+  },
+  {
+    name: "Manyavar",
+    category: "lifestyle",
+    type: "Lifestyle",
+    logo: "image/manyavar-logo.png",
+    status: "Available",
+    roi: "6.22%*",
+    lease: "15 Yr",
+    monthly: "₹70,000",
+    description: "Ethnic fashion retail tenant with premium brand recall and strong occasion-led customer demand.",
+    start: "₹1.35 Cr",
+    border: ""
+  },
+  {
+    name: "Looks salon",
+    category: "lifestyle",
+    type: "Lifestyle",
+    logo: "image/looks-salon-logo.png",
+    status: "Available",
+    roi: "6.25%*",
+    lease: "10 Yr",
+    monthly: "₹1,00,000",
+    description: "Premium salon tenant suited for lifestyle-led commercial locations with repeat customer demand.",
+    start: "₹1.92 Cr",
+    border: ""
+  },
+  {
+    name: "Westside",
+    category: "lifestyle",
+    type: "Lifestyle",
+    logo: "image/westside-logo.png",
+    status: "Anchor Tenant",
+    roi: "6.35%*",
+    lease: "12 Yr",
+    monthly: "₹1,50,000",
+    description: "Fashion and lifestyle anchor brand supporting consistent retail visibility and destination value.",
+    start: "₹3 Cr",
+    border: ""
+  },
+  {
+    name: "Tanishq",
+    category: "jewellery",
+    type: "Jewellery",
+    logo: "image/tanishq-logo.png",
+    status: "Pre-Leased",
+    roi: "6.55%*",
+    lease: "15 Yr",
+    monthly: "₹1,50,000",
+    description: "Premium jewellery tenant with strong trust value, high-ticket customer profile and brand-led footfall.",
+    start: "₹3 Cr",
+    border: ""
+  },
+  {
+    name: "Joyalukkas",
+    category: "jewellery",
+    type: "Jewellery",
+    logo: "image/joyalukkas-logo.png",
+    status: "Pre-Leased",
+    roi: "6.4%*",
+    lease: "15 Yr",
+    monthly: "₹1,60,000",
+    description: "Established jewellery brand suited for premium retail corridors and high-value commercial investments.",
+    start: "₹3 Cr",
+    border: ""
+  },
+  {
+    name: "Arte salon",
+    category: "lifestyle",
+    type: "Lifestyle",
+    logo: "image/arte-salon-logo.png",
+    status: "Available",
+    roi: "6.15%*",
+    lease: "12 Yr",
+    monthly: "₹1,50,000",
+    description: "Luxury salon tenant positioned for premium retail locations with lifestyle-focused customer demand.",
+    start: "₹3.75 Cr",
+    border: ""
+  },
+  {
+    name: "The collective",
+    category: "lifestyle",
+    type: "Lifestyle",
+    logo: "image/the-collective-logo.png",
+    status: "Select Units",
+    roi: "6.20%*",
+    lease: "10 Yr",
+    monthly: "₹1,50,000",
+    description: "Luxury fashion retail concept supporting premium positioning and high-end commercial brand value.",
+    start: "₹3.75 Cr",
+    border: ""
+  },
+  {
+    name: "Gegaeats",
+    category: "food",
+    type: "Food & Beverage",
+    logo: "image/gigaeats-logo.png",
+    status: "Available",
+    roi: "6.08%*",
+    lease: "10 Yr",
+    monthly: "₹1,90,000",
+    description: "Food-service tenant with strong consumption-led demand and recurring customer footfall potential.",
+    start: "₹3.75 Cr",
+    border: "hot"
+  },
+  {
+    name: "Sneakerz",
+    category: "lifestyle",
+    type: "Lifestyle",
+    logo: "image/sneakerz-logo.png",
+    status: "Available",
+    roi: "6.30%*",
+    lease: "12 Yr",
+    monthly: "₹2,25,000",
+    description: "Footwear and fashion-led tenant suited for youth-focused retail and premium shopping destinations.",
+    start: "₹5.25 Cr",
+    border: ""
+  },
+  {
+    name: "Clovia",
+    category: "lifestyle",
+    type: "Lifestyle",
+    logo: "image/clovia-logo.png",
+    status: "Available",
+    roi: "6.18%*",
+    lease: "10 Yr",
+    monthly: "₹2,25,000",
+    description: "Lifestyle retail tenant with brand recall and strong category relevance in urban retail markets.",
+    start: "₹5.30 Cr",
+    border: ""
+  },
+  {
+    name: "Mini klub",
+    category: "lifestyle",
+    type: "Lifestyle",
+    logo: "image/miniklub-logo.png",
+    status: "Available",
+    roi: "6.28%*",
+    lease: "12 Yr",
+    monthly: "₹3,00,000",
+    description: "Kidswear and family-focused retail brand suited for premium family-oriented commercial destinations.",
+    start: "₹7 Cr",
+    border: ""
+  },
+  {
+    name: "Giva",
+    category: "jewellery",
+    type: "Jewellery",
+    logo: "image/giva-logo.png",
+    status: "Pre-Leased",
+    roi: "6.45%*",
+    lease: "10 Yr",
+    monthly: "₹4,00,000",
+    description: "Modern jewellery retail tenant with strong urban appeal and premium high-street positioning.",
+    start: "₹10.50 Cr",
+    border: ""
+  },
+  {
+    name: "Png jewellers",
+    category: "jewellery",
+    type: "Jewellery",
+    logo: "image/png-jewellers-logo.png",
+    status: "Pre-Leased",
+    roi: "6.50%*",
+    lease: "12 Yr",
+    monthly: "₹4,50,000",
+    description: "Established jewellery tenant supporting premium commercial value and high-ticket retail demand.",
+    start: "₹10.50 Cr",
+    border: ""
+  },
+  {
+    name: "Right gold",
+    category: "jewellery",
+    type: "Jewellery",
+    logo: "image/right-gold-logo.png",
+    status: "Pre-Leased",
+    roi: "6.65%*",
+    lease: "10 Yr",
+    monthly: "₹4,80,000",
+    description: "Gold jewellery tenant positioned for premium commercial spaces with strong rental income potential.",
+    start: "₹10.50 Cr",
+    border: ""
+  },
+  {
+    name: "Bluestone",
+    category: "jewellery",
+    type: "Jewellery",
+    logo: "image/bluestone-logo.png",
+    status: "Pre-Leased",
+    roi: "6.25%*",
+    lease: "12 Yr",
+    monthly: "₹4,00,000",
+    description: "Contemporary jewellery brand suited for modern retail corridors and premium shopping environments.",
+    start: "₹11 Cr",
+    border: ""
+  },
+  {
+    name: "Ethera",
+    category: "jewellery",
+    type: "Jewellery",
+    logo: "image/ethera-logo.png",
+    status: "Pre-Leased",
+    roi: "6.20%*",
+    lease: "10 Yr",
+    monthly: "₹4,00,000",
+    description: "Premium jewellery tenant opportunity positioned for high-value commercial investment formats.",
+    start: "₹11 Cr",
+    border: ""
+  },
+  {
+    name: "Manuvel jewellers",
+    category: "jewellery",
+    type: "Jewellery",
+    logo: "image/manuvel-malabar-logo.png",
+    status: "Pre-Leased",
+    roi: "6.75%*",
+    lease: "12 Yr",
+    monthly: "₹8,00,000",
+    description: "Large jewellery tenant opportunity with strong rental value and premium retail positioning.",
+    start: "₹16 Cr",
+    border: ""
+  },
+  {
+    name: "Speadeal",
+    category: "office",
+    type: "Office",
+    logo: "image/snapdeal-logo.png",
+    status: "Available",
+    roi: "6.46%*",
+    lease: "9 Yr",
+    monthly: "₹35,000",
+    description: "Office tenant opportunity suited for business park formats with steady rental income potential.",
+    start: "₹65 Lakhs",
+    border: ""
+  },
+  {
+    name: "Statusneo",
+    category: "office",
+    type: "Office",
+    logo: "image/statusneo-logo.png",
+    status: "Available",
+    roi: "6.4%*",
+    lease: "15 Yr",
+    monthly: "₹40,000",
+    description: "Technology office tenant suited for modern commercial spaces and professional business environments.",
+    start: "₹75 Lakhs",
+    border: ""
+  },
+  {
+    name: "Vivo",
+    category: "office",
+    type: "Office",
+    logo: "image/vivo-logo.png",
+    status: "Available",
+    roi: "6.4%*",
+    lease: "15 Yr",
+    monthly: "₹40,000",
+    description: "Recognized corporate tenant supporting brand-led commercial credibility and rental stability.",
+    start: "₹75 Lakhs",
+    border: ""
+  },
+  {
+    name: "Salescode",
+    category: "office",
+    type: "Office",
+    logo: "image/salescode-logo.png",
+    status: "Available",
+    roi: "6.10%*",
+    lease: "10 Yr",
+    monthly: "₹35,000",
+    description: "Business office tenant suited for compact commercial units with stable income positioning.",
+    start: "₹70 Lakhs",
+    border: ""
+  },
+  {
+    name: "Incuspaze",
+    category: "office",
+    type: "Office",
+    logo: "image/incuspaze-logo.png",
+    status: "Available",
+    roi: "6.30%*",
+    lease: "12 Yr",
+    monthly: "₹80,000",
+    description: "Managed workspace tenant supporting office demand, business occupancy and recurring rental potential.",
+    start: "₹1.60 Cr",
+    border: ""
+  },
+  {
+    name: "Knowledge centre",
+    category: "office",
+    type: "Office",
+    logo: "image/knowledge-centre-logo.png",
+    status: "Available",
+    roi: "6.05%*",
+    lease: "9 Yr",
+    monthly: "₹36,000",
+    description: "Education and knowledge-focused office tenant suited for professional commercial environments.",
+    start: "₹72 Lakhs",
+    border: ""
+  }
+];
 
   const roiProfiles = {
-    banks: { rentFactor: 0.06 },
-    bank: { rentFactor: 0.06 },
-    gaming: { rentFactor: 0.07 },
-    food: { rentFactor: 0.08 },
-    retail: { rentFactor: 0.06 },
-    entertainment: { rentFactor: 0.055 },
-    lifestyle: { rentFactor: 0.075 }
+    gaming: { rentFactor: 0.067 },
+    food: { rentFactor: 0.062 },
+    retail: { rentFactor: 0.063 },
+    jewellery: { rentFactor: 0.065 },
+    lifestyle: { rentFactor: 0.062 },
+    office: { rentFactor: 0.063 }
   };
 
-  const compactModalLogoBrands = new Set(["Starbucks", "McDonald", "PVR INOX", "Domino Pizza", "HDFC Bank"]);
+  const compactModalLogoBrands = new Set(["21 fitness", "Lulu", "Giva", "Vivo"]);
+  const roiOptions = [
+    { value: "retail", label: "Retail Shop - 6.3% p.a." },
+    { value: "jewellery", label: "Jewellery Tenant - 6.5% p.a." },
+    { value: "lifestyle", label: "Lifestyle Store - 6.2% p.a." },
+    { value: "food", label: "Food & Beverage - 6.2% p.a." },
+    { value: "gaming", label: "Gaming & Entertainment - 6.7% p.a." },
+    { value: "office", label: "Office Space - 6.3% p.a." }
+  ];
   let currentRoiSnapshot = null;
 
   function formatIndianNumber(value) {
@@ -55,12 +393,21 @@
   }
 
   function getBrandCategoryLabel(category) {
-    if (category === "banks") return "Banking";
     if (category === "food") return "Food & Beverage";
     if (category === "gaming") return "Gaming & Entertainment";
-    if (category === "entertainment") return "Entertainment";
     if (category === "retail") return "Retail";
+    if (category === "jewellery") return "Jewellery";
+    if (category === "office") return "Office Space";
     return "Lifestyle";
+  }
+
+  function populateRoiOptions() {
+    const brandSelect = document.querySelector("[data-roi-brand]");
+    if (!brandSelect) return;
+
+    brandSelect.innerHTML = roiOptions
+      .map((option) => `<option value="${option.value}">${option.label}</option>`)
+      .join("");
   }
 
   function setHeaderState() {

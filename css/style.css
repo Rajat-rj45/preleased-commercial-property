@@ -113,7 +113,7 @@ img {
   width: min(100%, 1350px);
   min-height: 67px;
   display: grid;
-  grid-template-columns: 190px 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 22px;
   margin-inline: auto;
@@ -277,7 +277,7 @@ img {
   inset: 0;
   background:
     linear-gradient(90deg, rgba(247, 249, 250, 0.94) 0%, rgba(233, 238, 241, 0.78) 36%, rgba(32, 95, 129, 0.48) 62%, rgba(9, 24, 42, 0.68) 100%),
-    url("../assets/images/banner.webp") center center / cover no-repeat;
+    url("../assets/images/banner1.jpg") center center / cover no-repeat;
 }
 
 .hero-bg::before {
@@ -425,15 +425,16 @@ h1 em,
 }
 
 .brand-strip {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 11px;
+  display: grid;
+  grid-template-columns: repeat(8, 72px);
+  gap: 9px;
+  max-width: 639px;
+  margin-bottom: 16px;
 }
 
 .brand-strip div {
-  width: 56px;
-  height: 56px;
+  width: 72px;
+  height: 62px;
   display: grid;
   place-items: center;
   border: 1px solid #eef1f4;
@@ -443,13 +444,37 @@ h1 em,
   font-weight: 900;
   text-align: center;
   line-height: 1.1;
+  overflow: hidden;
 }
 
 .brand-strip img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 5px;
+  padding: 2px;
+}
+
+.brand-strip img[src*="image/"] {
+  padding: 0;
+  transform: scale(1.2);
+}
+
+.brand-strip img[src*="westside-logo"],
+.brand-strip img[src*="bluestone-logo"],
+.brand-strip img[src*="png-jewellers-logo"],
+.brand-strip img[src*="snapdeal-logo"],
+.brand-strip img[src*="manyavar-logo"],
+.brand-strip img[src*="incuspaze-logo"] {
+  transform: scale(1.34);
+}
+
+.brand-strip img[src*="hero-"] {
+  width: 96%;
+  height: 88%;
+  max-width: 96%;
+  max-height: 88%;
+  padding: 0;
+  transform: scale(1.04);
 }
 
 .metric-grid {
@@ -776,6 +801,53 @@ h1 em,
   margin: 0 0 18px;
 }
 
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sort-control {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 6px 10px 6px 14px;
+  border: 1px solid rgba(215, 221, 232, 0.92);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+}
+
+.sort-control span {
+  color: #0f172a;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.sort-control select {
+  min-width: 124px;
+  height: 32px;
+  padding: 0 34px 0 14px;
+  border: 0;
+  border-radius: 8px;
+  color: var(--blue);
+  background: #f0f5ff;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  outline: 1px solid transparent;
+}
+
+.sort-control select:focus-visible {
+  outline-color: rgba(0, 74, 173, 0.38);
+  box-shadow: 0 0 0 3px rgba(0, 74, 173, 0.12);
+}
+
 .card-toolbar strong {
   color: #0d3674;
   font-family: var(--font-sans);
@@ -785,7 +857,7 @@ h1 em,
   text-transform: uppercase;
 }
 
-.card-toolbar label {
+.logo-toggle-control {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -795,12 +867,12 @@ h1 em,
   font-weight: 800;
 }
 
-.card-toolbar input {
+.logo-toggle-control input {
   position: absolute;
   opacity: 0;
 }
 
-.card-toolbar label span {
+.logo-toggle-control span {
   position: relative;
   width: 32px;
   height: 18px;
@@ -808,7 +880,7 @@ h1 em,
   background: var(--blue);
 }
 
-.card-toolbar label span::after {
+.logo-toggle-control span::after {
   content: "";
   position: absolute;
   right: 2px;
@@ -820,11 +892,11 @@ h1 em,
   transition: transform var(--speed);
 }
 
-.card-toolbar input:not(:checked) + span {
+.logo-toggle-control input:not(:checked) + span {
   background: #cbd5e1;
 }
 
-.card-toolbar input:not(:checked) + span::after {
+.logo-toggle-control input:not(:checked) + span::after {
   transform: translateX(-14px);
 }
 
@@ -862,6 +934,17 @@ h1 em,
   border-color: rgba(215, 221, 232, 0.86);
 }
 
+.brand-card.sold-out {
+  position: relative;
+  border-color: rgba(220, 38, 38, 0.2);
+}
+
+.brand-card.sold-out:hover {
+  transform: none;
+  border-color: rgba(220, 38, 38, 0.28);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+}
+
 .brand-card:hover {
   transform: translateY(-8px);
   border-color: rgba(3, 71, 172, 0.26);
@@ -887,6 +970,94 @@ h1 em,
   font-weight: 900;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+}
+
+.brand-card.sold-out .brand-status {
+  display: none;
+}
+
+.sold-out-stamp {
+  position: absolute;
+  right: 52px;
+  top: 96px;
+  z-index: 2;
+  width: 285px;
+  height: 180px;
+  object-fit: contain;
+  opacity: 0.78;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  transform: rotate(-8deg) scale(1);
+  transform-origin: center;
+  filter:
+    contrast(1.18)
+    saturate(1.35)
+    drop-shadow(0 2px 0 rgba(185, 28, 28, 0.08))
+    drop-shadow(0 10px 18px rgba(185, 28, 28, 0.12));
+  will-change: transform, opacity, filter;
+  animation: soldOutStampImpression 2.4s ease-in-out infinite;
+}
+
+.brand-card.sold-out::after {
+  content: "";
+  position: absolute;
+  right: 86px;
+  top: 132px;
+  z-index: 1;
+  width: 210px;
+  height: 118px;
+  border-radius: 50%;
+  background: rgba(220, 38, 38, 0.08);
+  filter: blur(16px);
+  transform: rotate(-8deg);
+  pointer-events: none;
+  animation: soldOutInkBloom 2.4s ease-in-out infinite;
+}
+
+@keyframes soldOutStampImpression {
+  0% {
+    opacity: 0;
+    transform: rotate(-8deg) scale(1.34);
+    filter: contrast(1.05) saturate(1.1) blur(1.4px);
+  }
+
+  16% {
+    opacity: 0.92;
+    transform: rotate(-8deg) scale(0.92);
+    filter:
+      contrast(1.35)
+      saturate(1.55)
+      blur(0)
+      drop-shadow(0 2px 0 rgba(185, 28, 28, 0.08))
+      drop-shadow(0 10px 18px rgba(185, 28, 28, 0.14));
+  }
+
+  30% {
+    opacity: 0.78;
+    transform: rotate(-8deg) scale(1);
+  }
+
+  100% {
+    opacity: 0.74;
+    transform: rotate(-8deg) scale(1);
+  }
+}
+
+@keyframes soldOutInkBloom {
+  0% {
+    opacity: 0;
+    transform: rotate(-8deg) scale(0.72);
+  }
+
+  18% {
+    opacity: 1;
+    transform: rotate(-8deg) scale(1);
+  }
+
+  100% {
+    opacity: 0.58;
+    transform: rotate(-8deg) scale(1.04);
+  }
 }
 
 .brand-id {
@@ -1143,6 +1314,20 @@ h1 em,
   font-weight: 900;
   letter-spacing: 0.1em;
   transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease;
+}
+
+.brand-card-bottom .btn-sold-out {
+  color: #fff;
+  background: #b91c1c;
+  border-color: #b91c1c;
+  cursor: not-allowed;
+  opacity: 0.92;
+}
+
+.brand-card-bottom .btn-sold-out:hover,
+.brand-card-bottom .btn-sold-out:focus-visible {
+  transform: none;
+  box-shadow: none;
 }
 
 .brand-card:hover .invest-start strong {
@@ -1938,7 +2123,7 @@ blockquote {
   inset: 0;
   background:
     linear-gradient(90deg, rgba(0, 16, 42, 0.62), rgba(0, 74, 173, 0.24)),
-    url("../assets/images/banner.webp") center / cover no-repeat;
+    url("../assets/images/banner1.jpg") center / cover no-repeat;
   opacity: 0.32;
 }
 
@@ -1993,6 +2178,91 @@ blockquote {
   line-height: 1.75;
 }
 
+.legal-page {
+  background: #f4f7fb;
+}
+
+.legal-hero {
+  min-height: 520px;
+  padding: 82px 0 70px;
+}
+
+.legal-hero-grid {
+  min-height: 360px;
+}
+
+.legal-mark {
+  background: rgba(3, 71, 172, 0.95);
+}
+
+.legal-updated {
+  display: inline-flex;
+  margin: 0;
+  padding: 8px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.84);
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.legal-content-section {
+  padding: 58px 0 72px;
+  background:
+    linear-gradient(180deg, #f4f7fb 0%, #ffffff 54%, #f7f9fc 100%);
+}
+
+.legal-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 980px);
+  justify-content: center;
+}
+
+.legal-card {
+  padding: clamp(24px, 4vw, 46px);
+  border: 1px solid rgba(215, 221, 232, 0.96);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.12);
+}
+
+.legal-card h2 {
+  margin: 34px 0 12px;
+  color: #071b3d;
+  font-size: clamp(22px, 2.6vw, 30px);
+  line-height: 1.15;
+}
+
+.legal-card h2:first-child {
+  margin-top: 0;
+}
+
+.legal-card p {
+  margin: 0 0 16px;
+  color: #334155;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.legal-card strong {
+  color: #0f172a;
+}
+
+.legal-card a {
+  color: var(--blue);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.legal-footer {
+  background: #fff;
+}
+
 @keyframes modalPop {
   from {
     opacity: 0;
@@ -2043,7 +2313,7 @@ blockquote {
 
 @media (max-width: 1120px) {
   .nav-shell {
-    grid-template-columns: 160px 1fr;
+    grid-template-columns: 1fr auto;
     padding: 0 18px;
   }
 
@@ -2106,6 +2376,27 @@ blockquote {
 
   .thank-you-grid.single-hero {
     min-height: calc(100vh - 138px);
+  }
+
+  .legal-hero {
+    min-height: auto;
+    padding: 72px 0 52px;
+  }
+
+  .legal-hero-grid {
+    min-height: auto;
+  }
+
+  .legal-content-section {
+    padding: 38px 0 52px;
+  }
+
+  .legal-card {
+    padding: 24px 20px;
+  }
+
+  .legal-card p {
+    font-size: 14px;
   }
 
   .nav-shell {
@@ -2309,7 +2600,7 @@ blockquote {
   .hero-bg {
     background:
       linear-gradient(90deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.94)),
-      url("../assets/images/banner.webp") left 21% center / cover no-repeat;
+      url("../assets/images/banner1.jpg") left 21% center / cover no-repeat;
   }
 
   .hero .container {
@@ -2457,15 +2748,15 @@ blockquote {
   .brand-strip {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-bottom: 12px;
+    gap: 9px;
+    margin-bottom: 14px;
     width: 100%;
   }
 
   .brand-strip div {
     min-width: 0;
     width: auto;
-    height: 45px;
+    height: 52px;
     overflow: hidden;
     border: 0;
     background: #fff;
@@ -2473,13 +2764,34 @@ blockquote {
 
   .brand-strip img {
     display: block;
-    width: 62%;
-    height: 62%;
-    max-width: 62%;
-    max-height: 62%;
+    width: 94%;
+    height: 90%;
+    max-width: 94%;
+    max-height: 90%;
     padding: 0;
     object-fit: contain;
     object-position: center;
+  }
+
+  .brand-strip img[src*="image/"] {
+    transform: scale(1.22);
+  }
+
+  .brand-strip img[src*="westside-logo"],
+  .brand-strip img[src*="bluestone-logo"],
+  .brand-strip img[src*="png-jewellers-logo"],
+  .brand-strip img[src*="snapdeal-logo"],
+  .brand-strip img[src*="manyavar-logo"],
+  .brand-strip img[src*="incuspaze-logo"] {
+    transform: scale(1.36);
+  }
+
+  .brand-strip img[src*="hero-"] {
+    width: 96%;
+    height: 88%;
+    max-width: 96%;
+    max-height: 88%;
+    transform: scale(1.06);
   }
 
   .metric-grid {

@@ -6,17 +6,97 @@
   const closeModalButton = document.querySelector("[data-close-modal]");
   const brandGrid = document.querySelector("[data-brand-grid]");
   const logoToggle = document.querySelector("[data-logo-toggle]");
+  const costSort = document.querySelector("[data-sort-cost]");
+  const rentalSort = document.querySelector("[data-sort-rental]");
+  let activeFilter = "all";
 
   const brands = [
   {
-    name: "21 fitness",
+    name: "HDFC Bank",
+    category: "bank",
+    type: "Banking",
+    logo: "assets/images/logo/hdfc-bank-logo.png",
+    status: "Sold Out",
+    roi: "4.0%*",
+    lease: "9 Yr",
+    description: "India's leading private bank with strong lease security and long-term rental stability.",
+    start: "₹6 Cr",
+    border: "sold-out",
+    soldOut: true,
+    soldOutStamp: "image/sold-out-stamp.png"
+  },
+  {
+    name: "McDonald",
+    category: "food",
+    type: "Food & Beverage",
+    logo: "assets/images/logo/mcdonalds-logo.png",
+    status: "Sold Out",
+    roi: "5.0%*",
+    lease: "10 Yr",
+    description: "World's largest QSR brand.",
+    start: "₹10.5 Cr",
+    border: "sold-out",
+    soldOut: true,
+    soldOutStamp: "image/sold-out-stamp.png"
+  },
+  {
+    name: "United Colors of Benetton",
+    category: "lifestyle",
+    type: "Lifestyle",
+    logo: "image/united-colors-benetton-logo.png",
+    status: "Select Units",
+    roi: "5.0%*",
+    lease: "9 Yr",
+    description: "Premium fashion retail tenant with strong lifestyle positioning and dependable high-street customer pull.",
+    start: "₹3 Cr",
+    border: ""
+  },
+  {
+    name: "Croma",
+    category: "retail",
+    type: "Retail",
+    logo: "image/croma-logo.png",
+    status: "Anchor Tenant",
+    roi: "5.50%*",
+    lease: "9 Yr",
+    description: "Large-format electronics retail tenant suited for destination shopping corridors and repeat customer demand.",
+    start: "₹6 Cr",
+    border: "blue-border"
+  },
+  {
+    name: "Miniso",
+    category: "retail",
+    type: "Retail",
+    logo: "image/miniso-logo.png",
+    status: "Pre-Leased",
+    roi: "6.0%*",
+    lease: "10 Yr",
+    description: "Compact lifestyle and value retail brand with strong youth appeal, impulse buying and steady mall footfall.",
+    start: "₹5.5 Cr",
+    border: ""
+  },
+  {
+    name: "Canara Bank",
+    category: "bank",
+    type: "Banking",
+    logo: "image/canara-bank-logo.png",
+    status: "Sold Out",
+    roi: "4.25%*",
+    lease: "9 Yr",
+    description: "Public sector banking tenant with reliable occupancy profile and strong long-term branch stability.",
+    start: "₹8 Cr",
+    border: "sold-out",
+    soldOut: true,
+    soldOutStamp: "image/sold-out-stamp.png"
+  },
+  {
+    name: "21 FITNESS",
     category: "retail",
     type: "Retail",
     logo: "image/21-fitness-logo.png",
     status: "Available",
-    roi: "6.12%*",
+    roi: "6.50%*",
     lease: "10 Yr",
-    monthly: "₹25,000",
     description: "Fitness retail tenant suited for high-street commercial and lifestyle-focused retail destinations.",
     start: "₹49 Lakhs",
     border: ""
@@ -29,33 +109,30 @@
     status: "Available",
     roi: "6.21%*",
     lease: "12 Yr",
-    monthly: "₹30,000",
     description: "Retail brand opportunity positioned for compact commercial spaces with steady rental income potential.",
     start: "₹58 Lakhs",
     border: ""
   },
   {
-    name: "Lulu",
+    name: "LuLu",
     category: "retail",
     type: "Retail",
     logo: "image/lulu-logo.png",
     status: "Available",
     roi: "6.32%*",
     lease: "10 Yr",
-    monthly: "₹50,000",
     description: "Recognized retail tenant supporting strong consumer footfall and long-term commercial visibility.",
     start: "₹95 Lakhs",
     border: ""
   },
   {
-    name: "Jus jumpin",
+    name: "Jus Jumpin",
     category: "gaming",
     type: "Gaming & Entertainment",
     logo: "image/jus-jumpin-logo.png",
     status: "High Demand",
     roi: "6.70%*",
     lease: "10 Yr",
-    monthly: "₹90,000",
     description: "Family entertainment and activity-based tenant suited for destination retail and weekend footfall.",
     start: "₹1.95 Cr",
     border: "hot"
@@ -66,25 +143,25 @@
     type: "Lifestyle",
     logo: "image/manyavar-logo.png",
     status: "Available",
-    roi: "6.22%*",
-    lease: "15 Yr",
-    monthly: "₹70,000",
+    roi: "7.0%*",
+    lease: "19 Yr",
     description: "Ethnic fashion retail tenant with premium brand recall and strong occasion-led customer demand.",
     start: "₹1.35 Cr",
     border: ""
   },
   {
-    name: "Looks salon",
+    name: "Looks Salon",
     category: "lifestyle",
     type: "Lifestyle",
     logo: "image/looks-salon-logo.png",
-    status: "Available",
-    roi: "6.25%*",
+    status: "Sold Out",
+    roi: "6.50%*",
     lease: "10 Yr",
-    monthly: "₹1,00,000",
     description: "Premium salon tenant suited for lifestyle-led commercial locations with repeat customer demand.",
     start: "₹1.92 Cr",
-    border: ""
+    border: "sold-out",
+    soldOut: true,
+    soldOutStamp: "image/sold-out-stamp.png"
   },
   {
     name: "Westside",
@@ -92,9 +169,8 @@
     type: "Lifestyle",
     logo: "image/westside-logo.png",
     status: "Anchor Tenant",
-    roi: "6.35%*",
+    roi: "6.0%*",
     lease: "12 Yr",
-    monthly: "₹1,50,000",
     description: "Fashion and lifestyle anchor brand supporting consistent retail visibility and destination value.",
     start: "₹3 Cr",
     border: ""
@@ -105,9 +181,8 @@
     type: "Jewellery",
     logo: "image/tanishq-logo.png",
     status: "Pre-Leased",
-    roi: "6.55%*",
+    roi: "7.0%*",
     lease: "15 Yr",
-    monthly: "₹1,50,000",
     description: "Premium jewellery tenant with strong trust value, high-ticket customer profile and brand-led footfall.",
     start: "₹3 Cr",
     border: ""
@@ -118,38 +193,37 @@
     type: "Jewellery",
     logo: "image/joyalukkas-logo.png",
     status: "Pre-Leased",
-    roi: "6.4%*",
+    roi: "6.0%*",
     lease: "15 Yr",
-    monthly: "₹1,60,000",
     description: "Established jewellery brand suited for premium retail corridors and high-value commercial investments.",
     start: "₹3 Cr",
     border: ""
   },
   {
-    name: "Arte salon",
+    name: "Arte Salon",
     category: "lifestyle",
     type: "Lifestyle",
     logo: "image/arte-salon-logo.png",
     status: "Available",
-    roi: "6.15%*",
+    roi: "6.50%*",
     lease: "12 Yr",
-    monthly: "₹1,50,000",
     description: "Luxury salon tenant positioned for premium retail locations with lifestyle-focused customer demand.",
     start: "₹3.75 Cr",
     border: ""
   },
   {
-    name: "The collective",
+    name: "The Collective",
     category: "lifestyle",
     type: "Lifestyle",
     logo: "image/the-collective-logo.png",
-    status: "Select Units",
-    roi: "6.20%*",
+    status: "Sold Out",
+    roi: "7.0%*",
     lease: "10 Yr",
-    monthly: "₹1,50,000",
     description: "Luxury fashion retail concept supporting premium positioning and high-end commercial brand value.",
     start: "₹3.75 Cr",
-    border: ""
+    border: "sold-out",
+    soldOut: true,
+    soldOutStamp: "image/sold-out-stamp.png"
   },
   {
     name: "Gegaeats",
@@ -157,9 +231,8 @@
     type: "Food & Beverage",
     logo: "image/gigaeats-logo.png",
     status: "Available",
-    roi: "6.08%*",
+    roi: "6.50%*",
     lease: "10 Yr",
-    monthly: "₹1,90,000",
     description: "Food-service tenant with strong consumption-led demand and recurring customer footfall potential.",
     start: "₹3.75 Cr",
     border: "hot"
@@ -170,9 +243,8 @@
     type: "Lifestyle",
     logo: "image/sneakerz-logo.png",
     status: "Available",
-    roi: "6.30%*",
+    roi: "6.50%*",
     lease: "12 Yr",
-    monthly: "₹2,25,000",
     description: "Footwear and fashion-led tenant suited for youth-focused retail and premium shopping destinations.",
     start: "₹5.25 Cr",
     border: ""
@@ -183,22 +255,20 @@
     type: "Lifestyle",
     logo: "image/clovia-logo.png",
     status: "Available",
-    roi: "6.18%*",
+    roi: "7.0%*",
     lease: "10 Yr",
-    monthly: "₹2,25,000",
     description: "Lifestyle retail tenant with brand recall and strong category relevance in urban retail markets.",
     start: "₹5.30 Cr",
     border: ""
   },
   {
-    name: "Mini klub",
+    name: "Mini Klub",
     category: "lifestyle",
     type: "Lifestyle",
     logo: "image/miniklub-logo.png",
     status: "Available",
-    roi: "6.28%*",
+    roi: "7.0%*",
     lease: "12 Yr",
-    monthly: "₹3,00,000",
     description: "Kidswear and family-focused retail brand suited for premium family-oriented commercial destinations.",
     start: "₹7 Cr",
     border: ""
@@ -209,48 +279,44 @@
     type: "Jewellery",
     logo: "image/giva-logo.png",
     status: "Pre-Leased",
-    roi: "6.45%*",
+    roi: "6.50%*",
     lease: "10 Yr",
-    monthly: "₹4,00,000",
     description: "Modern jewellery retail tenant with strong urban appeal and premium high-street positioning.",
     start: "₹10.50 Cr",
     border: ""
   },
   {
-    name: "Png jewellers",
+    name: "PNG Jewellers",
     category: "jewellery",
     type: "Jewellery",
     logo: "image/png-jewellers-logo.png",
     status: "Pre-Leased",
-    roi: "6.50%*",
+    roi: "7.0%*",
     lease: "12 Yr",
-    monthly: "₹4,50,000",
     description: "Established jewellery tenant supporting premium commercial value and high-ticket retail demand.",
     start: "₹10.50 Cr",
     border: ""
   },
   {
-    name: "Right gold",
+    name: "Right Gold",
     category: "jewellery",
     type: "Jewellery",
     logo: "image/right-gold-logo.png",
     status: "Pre-Leased",
-    roi: "6.65%*",
+    roi: "7.0%*",
     lease: "10 Yr",
-    monthly: "₹4,80,000",
     description: "Gold jewellery tenant positioned for premium commercial spaces with strong rental income potential.",
     start: "₹10.50 Cr",
     border: ""
   },
   {
-    name: "Bluestone",
+    name: "BlueStone",
     category: "jewellery",
     type: "Jewellery",
     logo: "image/bluestone-logo.png",
     status: "Pre-Leased",
-    roi: "6.25%*",
+    roi: "6.90%*",
     lease: "12 Yr",
-    monthly: "₹4,00,000",
     description: "Contemporary jewellery brand suited for modern retail corridors and premium shopping environments.",
     start: "₹11 Cr",
     border: ""
@@ -261,48 +327,44 @@
     type: "Jewellery",
     logo: "image/ethera-logo.png",
     status: "Pre-Leased",
-    roi: "6.20%*",
+    roi: "7.0%*",
     lease: "10 Yr",
-    monthly: "₹4,00,000",
     description: "Premium jewellery tenant opportunity positioned for high-value commercial investment formats.",
     start: "₹11 Cr",
     border: ""
   },
   {
-    name: "Manuvel jewellers",
+    name: "Manuvel Jewellers",
     category: "jewellery",
     type: "Jewellery",
     logo: "image/manuvel-malabar-logo.png",
     status: "Pre-Leased",
-    roi: "6.75%*",
+    roi: "6.80%*",
     lease: "12 Yr",
-    monthly: "₹8,00,000",
     description: "Large jewellery tenant opportunity with strong rental value and premium retail positioning.",
     start: "₹16 Cr",
     border: ""
   },
   {
-    name: "Speadeal",
+    name: "Snapdeal",
     category: "office",
     type: "Office",
     logo: "image/snapdeal-logo.png",
     status: "Available",
-    roi: "6.46%*",
+    roi: "7.0%*",
     lease: "9 Yr",
-    monthly: "₹35,000",
     description: "Office tenant opportunity suited for business park formats with steady rental income potential.",
     start: "₹65 Lakhs",
     border: ""
   },
   {
-    name: "Statusneo",
+    name: "StatusNeo",
     category: "office",
     type: "Office",
     logo: "image/statusneo-logo.png",
     status: "Available",
-    roi: "6.4%*",
+    roi: "7.0%*",
     lease: "15 Yr",
-    monthly: "₹40,000",
     description: "Technology office tenant suited for modern commercial spaces and professional business environments.",
     start: "₹75 Lakhs",
     border: ""
@@ -313,9 +375,8 @@
     type: "Office",
     logo: "image/vivo-logo.png",
     status: "Available",
-    roi: "6.4%*",
+    roi: "7.0%*",
     lease: "15 Yr",
-    monthly: "₹40,000",
     description: "Recognized corporate tenant supporting brand-led commercial credibility and rental stability.",
     start: "₹75 Lakhs",
     border: ""
@@ -326,9 +387,8 @@
     type: "Office",
     logo: "image/salescode-logo.png",
     status: "Available",
-    roi: "6.10%*",
+    roi: "7.0%*",
     lease: "10 Yr",
-    monthly: "₹35,000",
     description: "Business office tenant suited for compact commercial units with stable income positioning.",
     start: "₹70 Lakhs",
     border: ""
@@ -339,22 +399,20 @@
     type: "Office",
     logo: "image/incuspaze-logo.png",
     status: "Available",
-    roi: "6.30%*",
+    roi: "7.0%*",
     lease: "12 Yr",
-    monthly: "₹80,000",
     description: "Managed workspace tenant supporting office demand, business occupancy and recurring rental potential.",
     start: "₹1.60 Cr",
     border: ""
   },
   {
-    name: "Knowledge centre",
+    name: "Knowledge Centre",
     category: "office",
     type: "Office",
     logo: "image/knowledge-centre-logo.png",
     status: "Available",
-    roi: "6.05%*",
+    roi: "7.0%*",
     lease: "9 Yr",
-    monthly: "₹36,000",
     description: "Education and knowledge-focused office tenant suited for professional commercial environments.",
     start: "₹72 Lakhs",
     border: ""
@@ -362,27 +420,60 @@
 ];
 
   const roiProfiles = {
-    gaming: { rentFactor: 0.067 },
-    food: { rentFactor: 0.062 },
-    retail: { rentFactor: 0.063 },
-    jewellery: { rentFactor: 0.065 },
-    lifestyle: { rentFactor: 0.062 },
-    office: { rentFactor: 0.063 }
+    food: { rentFactor: 0.08 },
+    retail: { rentFactor: 0.06 },
+    lifestyle: { rentFactor: 0.075 },
+    luxury: { rentFactor: 0.10 },
+    office: { rentFactor: 0.075 },
+    gaming: { rentFactor: 0.07 },
+    jewellery: { rentFactor: 0.06 },
+    bank: { rentFactor: 0.06 }
   };
 
-  const compactModalLogoBrands = new Set(["21 fitness", "Lulu", "Giva", "Vivo"]);
+  const compactModalLogoBrands = new Set(["21 FITNESS", "LuLu", "Giva", "Vivo"]);
   const roiOptions = [
-    { value: "retail", label: "Retail Shop - 6.3% p.a." },
-    { value: "jewellery", label: "Jewellery Tenant - 6.5% p.a." },
-    { value: "lifestyle", label: "Lifestyle Store - 6.2% p.a." },
-    { value: "food", label: "Food & Beverage - 6.2% p.a." },
-    { value: "gaming", label: "Gaming & Entertainment - 6.7% p.a." },
-    { value: "office", label: "Office Space - 6.3% p.a." }
+    { value: "food", label: "Food and Beverage (8 - 10% p.a.)" },
+    { value: "retail", label: "Anchor Retail - Retail (6% p.a.)" },
+    { value: "lifestyle", label: "Life Style Stores (7.5% p.a.)" },
+    { value: "luxury", label: "Luxury Stores (10% p.a.)" },
+    { value: "office", label: "Office Spaces (7.5% p.a.)" }
   ];
   let currentRoiSnapshot = null;
 
   function formatIndianNumber(value) {
     return Math.round(value).toLocaleString("en-IN");
+  }
+
+  function parseInvestmentLakhs(value) {
+    const rawValue = String(value || "");
+    const amount = Number.parseFloat(rawValue.replace(/[^\d.]/g, ""));
+
+    if (!Number.isFinite(amount)) return 0;
+    if (/cr|crore/i.test(rawValue)) return amount * 100;
+    return amount;
+  }
+
+  function parseAnnualRoi(value) {
+    const percentage = Number.parseFloat(String(value || "").replace(/[^\d.]/g, ""));
+    return Number.isFinite(percentage) ? percentage / 100 : 0;
+  }
+
+  function getBrandMonthlyRent(brand) {
+    const investmentLakhs = parseInvestmentLakhs(brand.start);
+    const annualRoi = parseAnnualRoi(brand.roi);
+
+    if (!investmentLakhs || !annualRoi) return "";
+
+    const monthlyRent = (investmentLakhs * 100000 * annualRoi) / 12;
+    return `₹${formatIndianNumber(monthlyRent)}`;
+  }
+
+  function getBrandMonthlyRentValue(brand) {
+    const investmentLakhs = parseInvestmentLakhs(brand.start);
+    const annualRoi = parseAnnualRoi(brand.roi);
+
+    if (!investmentLakhs || !annualRoi) return 0;
+    return (investmentLakhs * 100000 * annualRoi) / 12;
   }
 
   function formatLakhCrore(lakhs, decimals = 2) {
@@ -397,6 +488,7 @@
     if (category === "gaming") return "Gaming & Entertainment";
     if (category === "retail") return "Retail";
     if (category === "jewellery") return "Jewellery";
+    if (category === "bank") return "Banking";
     if (category === "office") return "Office Space";
     return "Lifestyle";
   }
@@ -536,7 +628,7 @@
       setLeadValue("[data-lead-property]", selectedBrand.name);
       setLeadValue("[data-lead-investment]", selectedBrand.start);
       setLeadValue("[data-lead-tenure]", selectedBrand.lease);
-      setLeadValue("[data-lead-monthly-rent]", selectedBrand.monthly);
+      setLeadValue("[data-lead-monthly-rent]", getBrandMonthlyRent(selectedBrand));
       setLeadValue("[data-lead-total-rental]", "");
       setLeadValue("[data-lead-appreciation]", "");
       setLeadValue("[data-lead-total-value]", "");
@@ -560,13 +652,28 @@
     if (!brandGrid) return;
 
     const visibleBrands = (filter === "all" ? brands : brands.filter((brand) => brand.category === filter))
-      .slice()
-      .sort((a, b) => parseFloat(b.roi) - parseFloat(a.roi));
+      .slice();
+
+    const rentalSortValue = rentalSort?.value || "default";
+    const costSortValue = costSort?.value || "default";
+
+    if (rentalSortValue !== "default") {
+      visibleBrands.sort((a, b) => {
+        const diff = getBrandMonthlyRentValue(a) - getBrandMonthlyRentValue(b);
+        return rentalSortValue === "high" ? -diff : diff;
+      });
+    } else {
+      visibleBrands.sort((a, b) => {
+        const diff = parseInvestmentLakhs(a.start) - parseInvestmentLakhs(b.start);
+        return costSortValue === "low" ? diff : -diff;
+      });
+    }
 
     brandGrid.innerHTML = visibleBrands.map((brand) => `
-      <article class="brand-card ${brand.border}" data-brand-index="${brands.indexOf(brand)}">
+      <article class="brand-card ${brand.border}" data-brand-index="${brands.indexOf(brand)}" ${brand.soldOut ? 'aria-disabled="true"' : ""}>
         <div class="brand-card-top">
-          <span class="brand-status">${brand.status}</span>
+          ${brand.soldOut ? "" : `<span class="brand-status">${brand.status}</span>`}
+          ${brand.soldOut ? `<img class="sold-out-stamp" src="${brand.soldOutStamp || "image/sold-out-stamp.png"}" alt="Sold out">` : ""}
           <div class="brand-id">
             <div class="brand-logo-media">
               <img src="${brand.logo}" alt="${brand.name} logo" loading="lazy">
@@ -579,13 +686,15 @@
           <div class="brand-stats">
             <div><strong class="green-stat">${brand.roi}</strong><span>Annual ROI</span></div>
             <div><strong>${brand.lease}</strong><span>Lease</span></div>
-            <div><strong>${brand.monthly}</strong><span>Monthly</span></div>
+            <div><strong>${getBrandMonthlyRent(brand)}</strong><span>Monthly</span></div>
           </div>
           <p>${brand.description}</p>
         </div>
         <div class="brand-card-bottom">
           <div class="invest-start">Investment Start: <strong>${brand.start}</strong></div>
-          <button class="btn btn-blue" type="button" data-open-modal data-brand-index="${brands.indexOf(brand)}">Invest Now →</button>
+          ${brand.soldOut
+            ? `<button class="btn btn-sold-out" type="button" disabled>Sold Out</button>`
+            : `<button class="btn btn-blue" type="button" data-open-modal data-brand-index="${brands.indexOf(brand)}">Invest Now →</button>`}
         </div>
       </article>
     `).join("");
@@ -785,6 +894,7 @@
 
     const brandCard = target.closest(".brand-card[data-brand-index]");
     if (brandCard && !target.closest("button, a")) {
+      if (brandCard.getAttribute("aria-disabled") === "true") return;
       const brandIndex = Number(brandCard.getAttribute("data-brand-index"));
       openModal(Number.isInteger(brandIndex) ? brands[brandIndex] : undefined);
     }
@@ -792,7 +902,8 @@
     if (target.matches("[data-filter]")) {
       document.querySelectorAll("[data-filter]").forEach((button) => button.classList.remove("active"));
       target.classList.add("active");
-      renderBrands(target.getAttribute("data-filter") || "all");
+      activeFilter = target.getAttribute("data-filter") || "all";
+      renderBrands(activeFilter);
     }
 
     if (target.matches('a[href^="#"]')) {
@@ -834,6 +945,16 @@
 
   logoToggle?.addEventListener("change", () => {
     brandGrid?.classList.toggle("hide-logos", !logoToggle.checked);
+  });
+
+  costSort?.addEventListener("change", () => {
+    if (costSort.value !== "default" && rentalSort) rentalSort.value = "default";
+    renderBrands(activeFilter);
+  });
+
+  rentalSort?.addEventListener("change", () => {
+    if (rentalSort.value !== "default" && costSort) costSort.value = "default";
+    renderBrands(activeFilter);
   });
 
   window.addEventListener("scroll", setHeaderState, { passive: true });

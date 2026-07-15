@@ -4,7 +4,7 @@ A responsive landing page for pre-leased commercial property investment enquirie
 
 ## Live Demo
 
-[View Live Website](https://iridescent-empanada-508e50.netlify.app/)
+[View Live Website](https://absoluteassets.in/preleased-properties)
 
 ## Tech Stack
 
@@ -76,7 +76,7 @@ npx serve .
 
 The project is deployed on Netlify:
 
-[https://iridescent-empanada-508e50.netlify.app/](https://iridescent-empanada-508e50.netlify.app/)
+[https://iridescent-empanada-508e50.netlify.app/](https://absoluteassets.in/preleased-properties)
 
 Recommended Netlify settings:
 
